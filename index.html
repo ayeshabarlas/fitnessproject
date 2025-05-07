@@ -8,8 +8,6 @@
   <style>
     body { font-family: sans-serif; }
     .hoverable:hover { background-color: #ebf8ff; cursor: pointer; }
-    body { font-family: sans-serif; }
-    .hoverable:hover { background-color: #ebf8ff; cursor: pointer; }
     .day-header { background-color: #2b6cb0; color: white; padding: 10px; border-radius: 5px; }
     .table-header { background-color: #3182ce; color: white; padding: 10px; border-radius: 5px; }
     .table { border-collapse: collapse; width: 100%; }
@@ -22,90 +20,85 @@
   <header class="text-center py-6 bg-white shadow">
     <h1 class="text-3xl font-bold">Fitness Program Builder</h1>
     <div class="flex justify-center mt-4 gap-4">
-      <button onclick="showPage('prompt')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Prompt Builder</button>
-      <button onclick="showPage('studio')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Playbook Studio</button>
+      <button id="showPromptBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Prompt Builder</button>
+      <button id="showStudioBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Playbook Studio</button>
     </div>
   </header>
 
   <main class="max-w-5xl mx-auto p-6">
- 
+    <!-- Prompt Builder Page -->
     <section id="prompt" class="space-y-4">
       <h2 class="text-2xl font-semibold">Fitness Program Prompt Builder</h2>
       <div class="grid grid-cols-2 gap-4">
-        <div><label>Number Of Weeks</label><input type="number" class="w-full border p-2 rounded" /></div>
-        <div><label>Program Name</label><input type="text" class="w-full border p-2 rounded" /></div>
-        <div><label>Training Modality</label><select class="w-full border p-2 rounded">
+        <div><label>Number Of Weeks</label><input id="numWeeks" type="number" value="8" class="w-full border p-2 rounded" /></div>
+        <div><label>Program Name</label><input id="programName" type="text" value="Power Build 2025" class="w-full border p-2 rounded" /></div>
+        <div><label>Training Modality</label><select id="trainingModality" class="w-full border p-2 rounded">
             <option>Strength Training</option>
             <option>HIIT</option>
             <option>Yoga</option>
           </select></div>
-        <div><label>Difficulty Level</label><select class="w-full border p-2 rounded">
+        <div><label>Difficulty Level</label><select id="difficultyLevel" class="w-full border p-2 rounded">
             <option>Beginner</option>
             <option>Intermediate</option>
             <option>Advanced</option>
           </select></div>
-        <div><label>Primary Focus</label><select class="w-full border p-2 rounded">
+        <div><label>Primary Focus</label><select id="primaryFocus" class="w-full border p-2 rounded">
             <option>Muscle Building</option>
             <option>Fat Loss</option>
             <option>Endurance</option>
           </select></div>
-        <div><label>Secondary Focus</label><select class="w-full border p-2 rounded">
+        <div><label>Secondary Focus</label><select id="secondaryFocus" class="w-full border p-2 rounded">
             <option>Cardio</option>
             <option>Flexibility</option>
             <option>Strength</option>
           </select></div>
-        <div><label>Days Per Week</label><select class="w-full border p-2 rounded">
+        <div><label>Days Per Week</label><select id="daysPerWeek" class="w-full border p-2 rounded">
             <option>3</option>
             <option>4</option>
             <option>5</option>
           </select></div>
-        <div><label>How Long Per Workout?</label><select class="w-full border p-2 rounded">
+        <div><label>How Long Per Workout?</label><select id="sessionDuration" class="w-full border p-2 rounded">
             <option>30 min</option>
             <option>45 min</option>
             <option>60 min</option>
           </select></div>
-        <div><label>Exercises Per Day</label><select class="w-full border p-2 rounded">
+        <div><label>Exercises Per Day</label><select id="exercisesPerDay" class="w-full border p-2 rounded">
             <option>4</option>
             <option>5</option>
             <option>6</option>
           </select></div>
-        <div><label>Sets Per Day</label><select class="w-full border p-2 rounded">
+        <div><label>Sets Per Day</label><select id="setsPerDay" class="w-full border p-2 rounded">
             <option>3</option>
             <option>4</option>
             <option>5</option>
           </select></div>
-        <div><label>Location</label><select class="w-full border p-2 rounded">
+        <div><label>Location</label><select id="location" class="w-full border p-2 rounded">
             <option>Gym</option>
             <option>Home</option>
           </select></div>
-        <div><label>Equipment List</label><input type="text" value="Dumbbells and bands" class="w-full border p-2 rounded" /></div>
-        <div><label>Intensifiers Used</label><select class="w-full border p-2 rounded">
+        <div><label>Equipment List</label><input id="equipmentList" type="text" value="Dumbbells and bands" class="w-full border p-2 rounded" /></div>
+        <div><label>Intensifiers Used</label><select id="intensifiersUsed" class="w-full border p-2 rounded">
             <option>Supersets</option>
             <option>Drop Sets</option>
             <option>Pause Reps</option>
           </select></div>
-        <div><label>Want Progression</label><select class="w-full border p-2 rounded">
+        <div><label>Want Progression</label><select id="wantProgression" class="w-full border p-2 rounded">
             <option>Yes</option>
             <option>No</option>
           </select></div>
       </div>
       <div>
         <label>Prompt Text:</label>
-        <textarea rows="6" class="w-full border p-2 rounded" readonly>
-Create a {NumberOfWeeks}-week fitness program called "{ProgramName}". This program should follow the {TrainingModality} training style and is designed for someone at the {DifficultyLevel} level.
-The primary focus of this program is {PrimaryFocus}, with a secondary focus on {SecondaryFocus}. The user will train {DaysPerWeek} days per week, with each session lasting around {SessionDuration} minutes.
-Each workout should include exactly {ExercisesPerDay} exercises and a total of {SetsPerDay} sets per day. The workouts will be performed at {Location}, and the available equipment includes: {EquipmentList}.
-Use the following training intensifiers where applicable: {IntensifiersUsed}.
-Do you want the program to progressively get more challenging each week? {WantProgression}.
-        </textarea>
+        <textarea id="promptOutput" rows="6" class="w-full border p-2 rounded" readonly></textarea>
       </div>
-      <button class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Generate Program</button>
+      <button id="generateBtn" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Generate Program</button>
     </section>
 
-  
+    <!-- Playbook Studio Page -->
     <section id="studio" class="hidden">
       <h2 class="text-2xl font-semibold mb-4">Playbook Studio</h2>
       
+      <!-- Day 1 - Upper Body -->
       <div class="space-y-6">
         <div>
           <h3 class="text-xl font-bold">Day 1 - Upper Body</h3>
@@ -124,13 +117,14 @@ Do you want the program to progressively get more challenging each week? {WantPr
               </tr>
             </thead>
             <tbody id="day1-table">
-           
+              <!-- Example Row: -->
               <tr class="hoverable">
                 <td class="p-2 text-center">1</td><td class="p-2 text-center">Regular</td><td class="p-2 text-center">A</td><td class="p-2">Barbell Bench Press</td><td class="p-2 text-center">3</td><td class="p-2 text-center">12,10,8</td><td class="p-2 text-center">95,115,135</td><td class="p-2 text-center">1-3-1</td><td class="p-2">Explosive</td>
               </tr>
+              <!-- Additional rows will be dynamically added here -->
             </tbody>
           </table>
-         
+          <!-- Day 2 - Lower Body -->
       <div class="space-y-6 mt-8">
         <div class="day-header">
           <h3 class="text-xl font-bold">Day 2 - Lower Body</h3>
@@ -160,7 +154,7 @@ Do you want the program to progressively get more challenging each week? {WantPr
         </table>
       </div>
 
- 
+      <!-- Day 3 - Core -->
       <div class="space-y-6 mt-8">
         <div class="day-header">
           <h3 class="text-xl font-bold">Day 3 - Core</h3>
@@ -190,7 +184,7 @@ Do you want the program to progressively get more challenging each week? {WantPr
         </table>
       </div>
 
-     
+      <!-- Day 4 - Full Body -->
       <div class="space-y-6 mt-8">
         <div class="day-header">
           <h3 class="text-xl font-bold">Day 4 - Full Body</h3>
@@ -226,8 +220,10 @@ Do you want the program to progressively get more challenging each week? {WantPr
     </section>
         </div>
 
+        <!-- Add more days dynamically or as per requirement -->
       </div>
 
+      <!-- Sidebar with Exercise Options -->
       <aside class="fixed right-0 top-0 h-full w-64 bg-white shadow p-4 overflow-y-auto">
         <h3 class="text-lg font-semibold mb-2">Exercises Needed to Record</h3>
         <ul class="space-y-2">
